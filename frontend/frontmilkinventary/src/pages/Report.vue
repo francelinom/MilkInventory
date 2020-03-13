@@ -1,9 +1,6 @@
 <template>
   <q-page class="flex flex-center">
-    <img
-      alt="LaboLeite logo"
-      src="~assets/laboleite.png"
-    >
+    <h1>Relatórios</h1>
   </q-page>
 </template>
 
