@@ -11,9 +11,7 @@
           @click="leftDrawerOpen = !leftDrawerOpen"
         />
 
-        <q-toolbar-title>
-          Milk Inventary
-        </q-toolbar-title>
+        <q-toolbar-title>Milk Inventary</q-toolbar-title>
 
         <div></div>
       </q-toolbar>
@@ -70,19 +68,19 @@ export default {
           title: 'Estoque',
           caption: '',
           icon: 'view_agenda',
-          link: ''
+          link: '/stock'
         },
         {
           title: 'Relatórios',
           caption: '',
           icon: 'list_alt',
-          link: ''
+          link: '/report'
         },
         {
           title: 'Cadastrar Item',
           caption: '',
           icon: 'library_add',
-          link: ''
+          link: '/item'
         },
         {
           title: 'Sair',
