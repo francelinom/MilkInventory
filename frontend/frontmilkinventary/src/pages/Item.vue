@@ -15,9 +15,9 @@
 
           <q-input v-model="date" filled type="date" hint="Data de Validade" />
 
-          <div class="flex flex-center">
+          <q-card-actions align="center">
             <q-btn label="Cadastrar" type="submit" color="primary"/>
-          </div>
+          </q-card-actions>
 
       </div>
     </div>
