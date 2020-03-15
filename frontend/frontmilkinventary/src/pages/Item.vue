@@ -1,7 +1,7 @@
 <template>
   <div class="q-pa-md flex flex-center">
     <div>
-      <div class="text-h3 text-bold login-title">Cadatro de Itens</div>
+      <div class="text-h3 text-bold login-title">Cadastro de Itens</div>
 
         <div class="q-gutter-y-md column" style="max-width: 300px">
 
