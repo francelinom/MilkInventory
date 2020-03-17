@@ -19,3 +19,6 @@ const Route = use('Route')
 Route.on('/').render('welcome')
 Route.resource('itens','ItemController')
     .apiOnly()
+    //.middleware('auth') Colocar quando houver autentucação
+Route.resource('stocks', 'StockController')
+    .apiOnly()

@@ -132,7 +132,7 @@ module.exports = {
   |
   */
   csrf: {
-    enable: true,
+    enable: false, // False para liberar as requisições sem autenticação, quando tive autenticação colocaar true
     methods: ['POST', 'PUT', 'DELETE'],
     filterUris: [],
     cookieOptions: {

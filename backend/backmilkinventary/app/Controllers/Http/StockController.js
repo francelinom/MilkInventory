@@ -1,7 +1,6 @@
-
 'use strict'
 
-const Item = use('App/Models/Item')
+const Stock = use('App/Models/Stock')
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
@@ -10,7 +9,7 @@ const Item = use('App/Models/Item')
 /**
  * Resourceful controller for interacting with items
  */
-class ItemController {
+class StockController {
   /**
    * Show a list of all items.
    * GET items
@@ -22,9 +21,9 @@ class ItemController {
    */
   async index () {
 
-    const itens = await Item.all()
+    const stocks = await Stock.all()
 
-    return itens
+    return stocks
 
   }
 
@@ -40,17 +39,12 @@ class ItemController {
 
     // const { id } = auth.user procedimento para quando tiver relacionamento com estoque
     const data = request.only([
-      'stock_id',
-      'name',
-      'brand',
-      'unity',
-      'qtyMinimun',
-      'validity'
+      'qtyStock',
     ])
   
-    const item = await Item.create({ ...data})
+    const stock = await Stock.create({ ...data /* user_id: id */ })
   
-    return item
+    return stock
 
   }
 
@@ -65,9 +59,11 @@ class ItemController {
    */
   async show ({ params}) {
 
-    const item = await Item.findOrFail(params.id)
+    const stock = await Stock.findOrFail(params.id)
+
+    await stock.load('itens')
   
-    return item
+    return stock
 
   }
 
@@ -81,22 +77,17 @@ class ItemController {
    */
   async update ({ params, request}) {
 
-    const item = await Item.findOrFail(params.id)
+    const stock = await Stock.findOrFail(params.id)
 
     const data = request.only([
-      'stock_id',
-      'name',
-      'brand',
-      'unity',
-      'qtyMinimun',
-      'validity'
+      'qtyStock'
     ])
   
-    item.merge(data)
+    stock.merge(data)
   
-    await item.save()
+    await stock.save()
   
-    return item
+    return stock
 
 }
 
@@ -110,13 +101,13 @@ class ItemController {
    */
   async destroy ({ params}) {
 
-    const item = await Item.findOrFail(params.id)
+    const stock = await Stock.findOrFail(params.id)
 
     // Ver outros métodos para deletar
 
-    await item.delete()
+    await stock.delete()
 
   }
 }
 
-module.exports = ItemController
+module.exports = StockController
