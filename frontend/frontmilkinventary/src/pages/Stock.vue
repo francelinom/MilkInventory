@@ -20,10 +20,20 @@
       </template>
 
     </q-table>
+    <ul>
+      <li v-for="stc in stocks" :key='stc'>{{stc}}</li>
+    </ul>
+
+    <ul>
+      <li v-for="stcid in stocksid" :key='stcid'>{{stcid}}</li>
+    </ul>
   </div>
 </template>
 
 <script>
+
+import { mapState, mapActions } from 'vuex'
+
 export default {
   name: 'Stock',
   data () {
@@ -45,6 +55,19 @@ export default {
         { name: 'data_validade', label: 'Data de Validade', field: 'data_validade' }
       ]
     }
+  },
+  created () {
+    this.getStocks()
+    this.getUnityStock(1)
+  },
+  computed: {
+    ...mapState({
+      stocks: state => state.stocks.list,
+      stocksid: state => state.stocks.listid
+    })
+  },
+  methods: {
+    ...mapActions(['getStocks', 'getUnityStock'])
   }
 }
 </script>
