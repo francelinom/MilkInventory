@@ -2,31 +2,23 @@
   <div class="q-pa-md">
     <q-table
       title="Lista de Estoque"
-      :data="data"
+      :data="stocks"
       :columns="columns"
       row-key="id"
-      :pagination.sync="pagination"
-      :loading="loading"
-      :filter="filter"
-      @request="onRequest"
+      :pagination.sync="stock"
+      :loading="false"
+      :filter="stock"
+      @request="stocks"
       binary-state-sort
     >
       <template v-slot:top-right>
-        <q-input borderless dense debounce="300" v-model="filter" placeholder="Procurar...">
+        <q-input borderless dense debounce="300" v-model="stock" placeholder="Procurar...">
           <template v-slot:append>
             <q-icon name="search" />
           </template>
         </q-input>
       </template>
-
     </q-table>
-    <ul>
-      <li v-for="stc in stocks" :key='stc'>{{stc}}</li>
-    </ul>
-
-    <ul>
-      <li v-for="stcid in stocksid" :key='stcid'>{{stcid}}</li>
-    </ul>
   </div>
 </template>
 
@@ -38,6 +30,9 @@ export default {
   name: 'Stock',
   data () {
     return {
+      filter: 'stocks',
+      stock: {},
+      stocks: [],
       columns: [
         {
           name: 'name',
