@@ -4,11 +4,16 @@ import {
 
 export default {
   state: {
-    list: []
+    list: [],
+    createItem: []
+
   },
   mutations: {
     setItens (state, list) {
       state.list = list
+    },
+    setCreateItem (state, payload) {
+      state.createItem = payload
     }
   },
   actions: {
@@ -19,16 +24,11 @@ export default {
       const result = await ItemService.query()
       commit('setItens', result.data)
     },
-    async createItem ({
-      commit
-    }, item) {
-      try {
-        console.log('CREATEITEM')
-        const result = await ItemService.create(item)
-        return result
-      } catch (error) {
-        console.log('Error ao criar item' + error)
-      }
+    async createItem (context) {
+      const {
+        data
+      } = await ItemService.query()
+      context.commit('setCreateItem', data)
     }
   },
   getters: {

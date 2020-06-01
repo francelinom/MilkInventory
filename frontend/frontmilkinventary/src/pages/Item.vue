@@ -4,24 +4,27 @@
       <div class="text-h3 text-bold login-title">Cadastro de Itens</div>
 
       <div class="q-gutter-y-md column col-3 col-sm-6" >
-        <q-input v-model="model" label="Nome do Produto"  />
+        <q-form>
+          <q-input v-model="item.name" label="Nome do Produto"  />
 
-        <q-input v-model="model" label="Marca" />
+          <q-input v-model="item.brand" label="Marca" />
 
-        <q-select v-model="model" :options="options" label="Unidade de Medida" />
+          <q-select v-model="item.unity" :options="options" label="Unidade de Medida" />
 
-        <q-input v-model="model" type="number" label="Quantidade Miníma" />
+          <q-input v-model="item.qtyMinimun" type="number" label="Quantidade Miníma" />
 
-        <q-input v-model="model" filled type="date" hint="Data de Validade" />
+          <q-input v-model="item.validity" filled type="date" hint="Data de Validade" />
 
-        <q-card-actions align="center">
-          <q-btn label="Cadastrar" type="submit" color="primary" />
-          <q-btn label="Cancelar" type="submit" color="red" />
+          <q-card-actions align="center">
+            <q-btn label="Cadastrar" type="submit" color="primary" @click="submit()"/>
+            <q-btn label="Cancelar" type="submit" color="red"/>
         </q-card-actions>
+        </q-form>
       </div>
 
-      <div >
-        <q-table :data="itens" title="Produtos" :columns="columns" row-key="id"/>
+      <div>
+        <q-table :data="itens" title="Produtos" :columns="columns" row-key="id">
+        </q-table>
       </div>
     </div>
   </div>
@@ -29,12 +32,14 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
+import { ItemService } from '../services/api.service'
 
 export default {
   name: 'Item',
   data () {
     return {
-      model: null,
+      item: {},
+      model: '',
       options: [
         'G', 'MG', 'L', 'ML'
       ],
@@ -51,14 +56,23 @@ export default {
   },
   created () {
     this.getItens()
+    this.createItem()
   },
   computed: {
     ...mapState({
-      itens: state => state.itens.list
+      itens: state => state.itens.list,
+      itensCreate: state => state.itens.createItem
     })
   },
   methods: {
-    ...mapActions(['getItens'])
+    ...mapActions(['getItens', 'createItem']),
+    async submit () {
+      try {
+        await ItemService.create(this.item)
+      } catch (error) {
+        alert(error)
+      }
+    }
   }
 }
 </script>
