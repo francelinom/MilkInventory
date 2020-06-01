@@ -17,7 +17,7 @@
 
           <q-card-actions align="center">
             <q-btn label="Cadastrar" type="submit" color="primary" @click="submit()"/>
-            <q-btn label="Cancelar" type="submit" color="red"/>
+            <q-btn label="Cancelar" type="submit" color="red" @click="item = {}"/>
         </q-card-actions>
         </q-form>
       </div>
