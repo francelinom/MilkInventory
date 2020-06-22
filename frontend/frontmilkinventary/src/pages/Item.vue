@@ -24,6 +24,7 @@
 
       <div>
         <q-table :data="itens" title="Produtos" :columns="columns" row-key="id">
+
         </q-table>
       </div>
     </div>
@@ -31,8 +32,10 @@
 </template>
 
 <script>
+
 import { mapState, mapActions } from 'vuex'
 import { ItemService } from '../services/api.service'
+import { date } from 'quasar'
 
 export default {
   name: 'Item',
@@ -44,12 +47,21 @@ export default {
         'G', 'MG', 'L', 'ML'
       ],
       columns: [
-        { name: 'stock_id', label: 'código', field: 'stock_id', sortable: true },
-        { name: 'name', label: 'Produto', field: 'name', sortable: true },
-        { name: 'brand', label: 'Marca', field: 'brand', sortable: true },
-        { name: 'unity', label: 'Unidade de Medida', field: 'unity', sortable: true },
-        { name: 'qtyMinimun', label: 'Qtd Mínima', field: 'qtyMinimun', sortable: true },
-        { name: 'validity', label: 'Validade', field: 'validity', sortable: true },
+        { name: 'stock_id', label: 'código', field: 'stock_id', sortable: true, align: 'left' },
+        { name: 'name', label: 'Produto', field: 'name', sortable: true, align: 'left' },
+        { name: 'brand', label: 'Marca', field: 'brand', sortable: true, align: 'left' },
+        { name: 'unity', label: 'Unidade de Medida', field: 'unity', sortable: true, align: 'left' },
+        { name: 'qtyMinimun', label: 'Qtd Mínima', field: 'qtyMinimun', sortable: true, align: 'left' },
+        {
+          name: 'validity',
+          label: 'Validade',
+          field: 'validity',
+          sortable: true,
+          align: 'left',
+          format (value) {
+            return date.formatDate(value, 'DD/MM/YYYY')
+          }
+        },
         { name: 'actions', label: 'Ações' }
       ]
     }
